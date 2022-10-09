@@ -14,8 +14,22 @@ namespace alpr
 
   std::string getExeDir()
   {
-          #ifdef WINDOWS
+          #ifdef MSVC
                   TCHAR szEXEPath[2048];
+                  std::stringstream ss;
+                  GetModuleFileName(NULL, szEXEPath, 2048);
+                  ss << szEXEPath;
+
+                  std::string exeFile = ss.str();
+                  std::string directory;
+                  const size_t last_slash_idx = exeFile.rfind('\\');
+                  if (std::string::npos != last_slash_idx)
+                  {
+                          directory = exeFile.substr(0, last_slash_idx);
+                  }
+                  return directory;
+		  #elif MINGW
+		          TCHAR szEXEPath[2048];
                   std::stringstream ss;
                   GetModuleFileName(NULL, szEXEPath, 2048);
                   ss << szEXEPath;

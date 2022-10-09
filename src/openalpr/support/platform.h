@@ -4,10 +4,13 @@
 #include <string.h>
 #include <sstream>
 
-#ifdef WINDOWS
-	#include <windows.h>
+#ifdef MSVC
+#include <windows.h>
+#elif MINGW
+#include <windows.h>
+#include <unistd.h>
 #else
-	#include <unistd.h>
+#include <unistd.h>
 #endif
 
 namespace alpr

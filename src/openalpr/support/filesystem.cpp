@@ -4,7 +4,7 @@
 #include <errno.h>
 #include <fstream>
 #include <string.h>
-
+#include <sstream>
 
 
 namespace alpr
@@ -157,7 +157,7 @@ namespace alpr
     return "";
   }
 
-  #ifdef WINDOWS
+  #ifdef MSVC
   // Stub out these functions on Windows.  They're used for the daemon anyway, which isn't supported on Windows.
 
   static int makeDir(const char *path, mode_t mode) { return 0; }
@@ -177,8 +177,24 @@ namespace alpr
     return response;
   }
 
-  #else
+  #elif MINGW
+  static int makeDir(const char *path, mode_t mode) { return 0; }
+  bool makePath(const char* path, mode_t mode) {
+      std::stringstream pathstream;
+      pathstream << "mkdir " << path;
+      std::string candidate_path = pathstream.str();
+      std::replace(candidate_path.begin(), candidate_path.end(), '/', '\\');
 
+      system(candidate_path.c_str());
+      return true;
+  }
+  FileInfo getFileInfo(std::string filename) {
+    FileInfo response;
+    response.creation_time = 0;
+    response.size = 0;
+    return response;
+  }
+#else
   FileInfo getFileInfo(std::string filename)
   {
     FileInfo response;

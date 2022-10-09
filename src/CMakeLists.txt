@@ -113,8 +113,9 @@ add_definitions( -DOPENCV_MAJOR_VERSION=${OpenCV_VERSION_MAJOR})
 include_directories(./openalpr )
 
 IF (WIN32)
-	add_definitions( -DWINDOWS)
-	add_definitions( -DNOMINMAX)
+    #add_definitions( -DMSVC)
+    add_definitions( -DMINGW)
+    add_definitions( -DNOMINMAX)
 
 	# Extra linker dependencies for Windows
 	SET (Tesseract_LIBRARIES
