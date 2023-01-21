@@ -48,7 +48,7 @@ const int UP_ARROW_KEY= 0;
 const int ENTER_KEY_ONE = 13;
 const int ENTER_KEY_TWO = 10;
 
-#elif WIN32
+#elif _WIN32
 const int LEFT_ARROW_KEY = 2424832;
 const int RIGHT_ARROW_KEY = 2555904;
 

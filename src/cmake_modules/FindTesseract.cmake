@@ -19,41 +19,45 @@ find_path(Tesseract_INCLUDE_BASEAPI_DIR
         "/usr/local/include/tesseract"
         "/opt/local/include"
         "/opt/local/include/tesseract"
+        "C:/msys64/mingw64/include/tesseract"
         ${Tesseract_PKGCONF_INCLUDE_DIRS}
-		${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/api/
+        ${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/api/
 )
 find_path(Tesseract_INCLUDE_CCSTRUCT_DIR
-  NAMES publictypes.h
+  NAMES tesseract/publictypes.h
   HINTS "/usr/include"
         "/usr/include/tesseract"
         "/usr/local/include"
         "/usr/local/include/tesseract"
         "/opt/local/include"
         "/opt/local/include/tesseract"
+        "C:/msys64/mingw64/include/tesseract"
         ${Tesseract_PKGCONF_INCLUDE_DIRS}
-		${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/ccstruct/
+        ${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/ccstruct/
 )
 find_path(Tesseract_INCLUDE_CCMAIN_DIR
-  NAMES thresholder.h
+  NAMES tesseract/thresholder.h tesseract/publictypes.h
   HINTS "/usr/include"
         "/usr/include/tesseract"
         "/usr/local/include"
         "/usr/local/include/tesseract"
         "/opt/local/include"
         "/opt/local/include/tesseract"
+        "C:/msys64/mingw64/include/tesseract"
         ${Tesseract_PKGCONF_INCLUDE_DIRS}
-		${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/ccmain/
+        ${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/ccmain/
 )
 find_path(Tesseract_INCLUDE_CCUTIL_DIR
-  NAMES platform.h
+  NAMES tesseract/platform.h tesseract/publictypes.h
   HINTS "/usr/include"
         "/usr/include/tesseract"
         "/usr/local/include"
         "/usr/local/include/tesseract"
         "/opt/local/include"
         "/opt/local/include/tesseract"
+        "C:/msys64/mingw64/include/tesseract"
         ${Tesseract_PKGCONF_INCLUDE_DIRS}
-		${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/ccutil/
+        ${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/ccutil/
 )
 
 
@@ -64,27 +68,27 @@ find_library(Tesseract_LIB
         "/usr/local/lib"
         "/opt/local/lib"
         ${Tesseract_PKGCONF_LIBRARY_DIRS}
-		${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/api/.libs
-		${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/vs2010/LIB_Release
+        ${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/api/.libs
+        ${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/vs2010/LIB_Release
 )
 
 find_library(Leptonica_LIB
-  NAMES liblept170 liblept lept
+  NAMES liblept170 liblept lept libleptonica
   HINTS "/usr/lib"
         "/usr/local/lib"
         "/opt/local/lib"
         ${Tesseract_PKGCONF_LIBRARY_DIRS}
-		${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/api/.libs
-		${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/vs2010/LIB_Release
+        ${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/api/.libs
+        ${CMAKE_SOURCE_DIR}/../libraries/tesseract-ocr/vs2010/LIB_Release
 )
 
 # Set the include dir variables and the libraries and let libfind_process do the rest.
 # NOTE: Singular variables for this library, plural for libraries this this lib depends on.
-set(Tesseract_PROCESS_INCLUDES 
-    Tesseract_INCLUDE_BASEAPI_DIR 
-	Tesseract_INCLUDE_CCSTRUCT_DIR
-	Tesseract_INCLUDE_CCMAIN_DIR
-	Tesseract_INCLUDE_CCUTIL_DIR
-	Tesseract_INCLUDE_DIRS)
+set(Tesseract_PROCESS_INCLUDES
+    Tesseract_INCLUDE_BASEAPI_DIR
+    Tesseract_INCLUDE_CCSTRUCT_DIR
+    Tesseract_INCLUDE_CCMAIN_DIR
+    Tesseract_INCLUDE_CCUTIL_DIR
+    Tesseract_INCLUDE_DIRS)
 set(Tesseract_PROCESS_LIBS Tesseract_LIB Leptonica_LIB Tesseract_LIBRARIES)
 libfind_process(Tesseract)
